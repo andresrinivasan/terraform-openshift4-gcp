@@ -1,3 +1,13 @@
+// ignition moved from a builtin to a community provider
+terraform {
+  required_providers {
+    ignition = {
+      source  = "community-terraform-providers/ignition"
+      version = "2.1.2"
+    }
+  }
+}
+
 locals {
   installer_workspace     = "${path.root}/installer-files"
   openshift_installer_url = "${var.openshift_installer_url}/${var.openshift_version}"
@@ -36,10 +46,11 @@ fi
 EOF
   }
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "rm -rf ${local.installer_workspace}"
-  }
+  //  This no longer works with newer versions of TF
+  //  provisioner "local-exec" {
+  //    when    = destroy
+  //    command = "rm -rf ${local.installer_workspace}"
+  //  }
 
 }
 
