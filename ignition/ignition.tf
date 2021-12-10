@@ -36,10 +36,11 @@ fi
 EOF
   }
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "rm -rf ${local.installer_workspace}"
-  }
+  //  This no longer works with newer versions of TF
+  //  provisioner "local-exec" {
+  //    when    = destroy
+  //    command = "rm -rf ${local.installer_workspace}"
+  //  }
 
 }
 
